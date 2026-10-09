@@ -1,7 +1,7 @@
 # Docking autónomo del iRobot Create 3 usando solo LiDAR — Kalman Dock Challenge, HRFEST 2026.
 **Autora:** Camila Zubieta
 
-**Video demo:** https://youtu.be/T5m1wu69nyY?si=C_546L7OoQ4B9G1t
+**Video demo:** https://youtu.be/QKRxlFD1iM8
 
 ## Idea
 El escaneo LiDAR se transforma al sistema de coordenadas `base_link` mediante TF, corrigiendo la orientación de 180° y el desplazamiento del sensor respecto al centro del robot. Luego, se utiliza RANSAC para extraer las paredes como rectas y detectar sobre ellas dos segmentos de 8 cm que sobresalen 8 cm, separados por un hueco de 9,5 cm. El centro de ese hueco y la normal de la pared permiten estimar el eje del dock. Esta estimación se filtra en el sistema de coordenadas `odom` mediante un filtro exponencial y el rechazo de valores atípicos. Finalmente, el controlador sigue un punto objetivo situado sobre el eje del dock y corrige simultáneamente los errores lateral y angular para lograr un acoplamiento preciso.
