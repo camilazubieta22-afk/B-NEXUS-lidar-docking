@@ -1,0 +1,56 @@
+dock_lidar:
+  ros__parameters:
+    base_frame: base_link
+    odom_frame: odom
+    control_rate: 20.0          # Hz del lazo de control
+    enabled: true               # false = calcula todo pero no mueve el robot
+
+    perception:
+      box_width: 0.08           # medidas del marcador (README oficial)
+      box_protrusion: 0.08
+      gap_width: 0.095
+      max_range: 4.5            # ignora puntos mas lejanos [m]
+      ransac_iters: 150
+      line_tol: 0.015           # [m] distancia max de un punto a su pared
+      min_line_points: 20
+      min_line_length: 0.40     # [m]
+      max_lines: 6
+      protrusion_tol: 0.03      # [m] tolerancia sobre los 8 cm de profundidad
+      size_tol: 0.03            # [m] tolerancia sobre anchos / hueco
+      min_box_points: 2
+      seed: 0
+
+    tracker:
+      alpha: 0.5                # peso de cada deteccion nueva (0..1). Bajo = suave pero lento
+      gate_dist: 0.25           # [m] salto maximo aceptado del centro
+      gate_angle: 0.35          # [rad]
+      switch_count: 3
+      timeout: 3.0              # [s] memoria si deja de ver las cajas
+
+    control:
+      v_max: 0.20               # [m/s] velocidad maxima de aproximacion
+      v_final: 0.04             # [m/s] velocidad en el ultimo tramo
+      w_max: 1.0                # [rad/s]
+      k_w: 2.0                  # ganancia angular
+      k_v: 0.8                  # ganancia lineal (ir a un punto)
+      rotate_in_place: 0.6      # [rad] por encima: gira sin avanzar
+      lookahead_gain: 0.6
+      lookahead_min: 0.12       # [m]
+      lookahead_max: 0.60       # [m]
+      dock_dist: 0.18           # [m] centro robot -> cara de las cajas al acoplar
+      predock_dist: 0.70        # [m] punto previo sobre el eje
+      predock_tol: 0.06         # [m]
+      final_zone: 0.40          # [m] distancia donde empieza FINAL
+      cone_slope: 0.6           # embudo de entrada directa al eje
+      cone_margin: 0.04         # [m]
+      final_abort_lat: 0.04     # [m]
+      final_abort_head: 0.25    # [rad]
+      final_check_dist: 0.30    # [m]
+      stall_time: 4.0           # [s]
+      backoff_speed: 0.10       # [m/s]
+      backoff_dist: 0.40        # [m]
+      search_time: 1.5          # [s]
+      explore_step: 1.2         # [m]
+      explore_timeout: 15.0     # [s]
+      robot_radius: 0.17        # [m]
+      safety_dist: 0.15         # [m]
